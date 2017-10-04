@@ -1,3 +1,4 @@
+require 'pry'
 class Application
   def call(env)
     resp = Rack::Response.new
@@ -6,7 +7,7 @@ class Application
     if req.path.match(/items/)
       item_name = req.path.split("/items/").last
       item_index = nil
-      require binding.pry
+      binding.pry
       if Item.all.detect.with_index{|i, index| i.name == item_name ? item_index = index : nil}
         resp.write Item.all[item_index].price
       else
